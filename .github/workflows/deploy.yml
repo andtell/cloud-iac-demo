@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'gitops-demo/aws/infra/**'
-  # workflow_dispatch:
+  workflow_dispatch:
 jobs:
   update:
     name: Update
