@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'gitops-demo/aws/infra'
+      - 'gitops-demo/aws/infra/**'
   # workflow_dispatch:
 jobs:
   update:
