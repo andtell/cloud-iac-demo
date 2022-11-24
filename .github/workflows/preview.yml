@@ -6,6 +6,7 @@ on:
       - develop
     paths:
       - 'gitops-demo/aws/infra'
+  workflow_dispatch:
 jobs:
   preview:
     name: Preview
