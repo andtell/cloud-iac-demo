@@ -10,10 +10,13 @@ export const bucketMap = new Map<string, aws.s3.Bucket>();
 
 // Create an AWS resource (S3 Bucket)
 function createBucket(name: string) : aws.s3.Bucket {
+    if(pulumi.getStack() !== 'prod') {
+        name = name + "-" + pulumi.getStack();
+    }
     return new aws.s3.Bucket(name, {
         tags : {
             Cadec: '2023',
-            Environment: pulumi.StackReference.name,
+            Environment: pulumi.getStack(),
             Name: name,
         },
     });
