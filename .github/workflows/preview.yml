@@ -2,7 +2,7 @@ name: Preview Changes
 on:
   pull_request:
     branches:
-      - master
+      - develop
     paths:
       - 'gitops-demo/aws/infra/**'
   push:
