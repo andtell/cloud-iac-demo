@@ -13,6 +13,13 @@ jobs:
     name: Update
     runs-on: ubuntu-latest
     steps:
+      run: echo ${{github.ref}}
+      - name: Configuration for main branch 🏭
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "PULUMI_STACK=prod" >> $GITHUB_ENV
+      - name: Configuration for develop branch 😎
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        run: echo "PULUMI_STACK=dev" >> $GITHUB_ENV
       - name: Checkout 🛎️
         uses: actions/checkout@v2
       - name: Setup Node ✨
@@ -33,7 +40,7 @@ jobs:
         uses: pulumi/actions@v3
         with:
           command: up
-          stack-name: dev # When using an individual account, only use stack-name.
+          stack-name: ${{ env.PULUMI_STACK }}
           work-dir: gitops-demo/aws/infra
           refresh: true;
         env:
