@@ -3,6 +3,8 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - 'gitops-demo/aws/infra/**'
   push:
     branches:
       - develop
