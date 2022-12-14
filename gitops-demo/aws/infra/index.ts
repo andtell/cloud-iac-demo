@@ -3,7 +3,7 @@ import * as aws from "@pulumi/aws";
 
 export const bucketMap = new Map<string, aws.s3.Bucket>();
 
-["cadec2023-gbg", "imperative", "infrastructure", "declarations", "rocks"]
+["imperative", "infrastructure", "definitions", "rocks"]
 .forEach( s => {
     bucketMap.set(s, createBucket(s));
 })
