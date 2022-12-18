@@ -1,0 +1,39 @@
+name: Preview Changes
+on:
+  pull_request:
+    branches:
+      - develop
+    paths:
+      - 'gitops-demo/app/**'
+  push:
+    branches:
+      - develop
+    paths:
+      - 'gitops-demo/app/**'
+  workflow_dispatch:
+jobs:
+  preview:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configuration for main branch 🏭
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "PULUMI_STACK=prod" >> $GITHUB_ENV
+      - name: Configuration for develop branch 😎
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        run: echo "PULUMI_STACK=dev" >> $GITHUB_ENV
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Setup Node ✨
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Building app 🏗️
+        run: |
+          cd ./gitops-demo/aws/app
+          npm run-script prodbuild
+      - name: Upload zip-archive 📦️
+        uses: actions/upload-artifact@v3
+        with:
+          name: function.zip
+          path: function.zip
