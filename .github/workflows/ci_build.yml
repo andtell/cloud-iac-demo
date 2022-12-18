@@ -12,8 +12,8 @@ on:
       - 'gitops-demo/app/**'
   workflow_dispatch:
 jobs:
-  preview:
-    name: Preview
+  build:
+    name: CI Build
     runs-on: ubuntu-latest
     steps:
       - name: Configuration for main branch 🏭
