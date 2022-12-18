@@ -39,10 +39,17 @@ jobs:
           cd ./gitops-demo/aws/infra
           npm install
       - name: Download application artifact from CI build 📂 
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
-          name: function.zip
           path: gitops-demo/aws/app
+          workflow: ci_build.yml
+          workflow_conclusion: success
+          skip_unpack: true
+      # - name: Download application artifact from CI build 📂 
+        # uses: actions/download-artifact@v3
+        # with:
+        #   name: function.zip
+        #   path: gitops-demo/aws/app
       - name: Infrastructure preview 🔍
         uses: pulumi/actions@v3
         with:
