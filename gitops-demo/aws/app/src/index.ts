@@ -8,8 +8,8 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     return {
         statusCode: 200,
         body: JSON.stringify({
-            message: '*** You voted for AWS ***',
-            postedBodey: JSON.parse(bodyString)
+            message: '*** Meh ***',
+            postedBodeh: JSON.parse(bodyString)
         }),
     };
 };

@@ -1,8 +1,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * as apigateway from "@pulumi/aws-apigateway";
+//import * as awsx from "@pulumi/awsx";
 
-export const bucketMap = new Map<string, aws.s3.Bucket>();
+/* export const bucketMap = new Map<string, aws.s3.Bucket>();
 
 ["imperative", "infrastructure", "definitions", "rocks"]
 .forEach( s => {
@@ -21,7 +22,7 @@ function createBucket(name: string) : aws.s3.Bucket {
             Name: name,
         },
     });
-}
+} */
 
 if(process.env.CI) {
     console.log(" ***************** ")
@@ -29,20 +30,20 @@ if(process.env.CI) {
     console.log(" ***************** ")
 }
 
-const iamForLambda = new aws.iam.Role("thumbnailerRole", {
-    assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({ Service: "lambda.amazonaws.com" }),
+const lambdaRole = new aws.iam.Role("lambdaRole", {
+    assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({Service: "lambda.amazonaws.com"}),
 });
 
 const lambdaBasicExecutionRole = new aws.iam.RolePolicyAttachment("basicExecutionRole", {
-    role: iamForLambda.name,
+    role: lambdaRole.name,
     policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
 });
 
 // A Lambda function to invoke
 // https://www.pulumi.com/registry/packages/aws/api-docs/lambda/function/
-const testLambda = new aws.lambda.Function("vote-handler-fn", {
+const myLamb = new aws.lambda.Function("vote-handler-fn-dfk", {
     code: new pulumi.asset.FileArchive("../app/function.zip"),
-    role: iamForLambda.arn,
+    role: lambdaRole.arn,
     handler: "index.handler", // references the exported function in index.js
     runtime: "nodejs16.x",
     environment: {
@@ -52,12 +53,24 @@ const testLambda = new aws.lambda.Function("vote-handler-fn", {
     },
 });
 
+// const helloHandler = new aws.lambda.CallbackFunction("hello-handler", {
+//     callback: async (ev, ctx) => {
+//       return {
+//         statusCode: 200,
+//         body: "Hello, API Gateway!",
+//       };
+//     },
+//   });
+
+
+
 
 // A REST API to route requests to HTML content and the Lambda function
 const api = new apigateway.RestAPI("api", {
     stageName: `${pulumi.getStack()}`,
     routes: [
-        { path: "/vote", method: "POST", eventHandler: testLambda },
+        // { path: "/", localPath: "www"},
+        { path: "/vote", method: "POST", eventHandler: myLamb },
     ]
 });
 
