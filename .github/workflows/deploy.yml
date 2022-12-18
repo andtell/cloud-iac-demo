@@ -35,6 +35,13 @@ jobs:
         run: |
           cd ./gitops-demo/aws/infra
           npm install
+      - name: Download application artifact from CI build 📂 
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          path: gitops-demo/aws/app
+          workflow: ci_build.yml
+          workflow_conclusion: success
+          skip_unpack: true
       - name: Applying infrastructure 🚀
         uses: pulumi/actions@v3
         with:
