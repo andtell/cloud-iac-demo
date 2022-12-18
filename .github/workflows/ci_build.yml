@@ -35,6 +35,6 @@ jobs:
       - name: Upload zip-archive 📦️
         uses: actions/upload-artifact@v3
         with:
-          name: function.zip
+          name: function
           path: gitops-demo/aws/app/function.zip
           if-no-files-found: error
