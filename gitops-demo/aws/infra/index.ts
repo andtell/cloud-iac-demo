@@ -21,3 +21,9 @@ function createBucket(name: string) : aws.s3.Bucket {
         },
     });
 }
+
+if(process.env.CI) {
+    console.log(" ***************** ")
+    console.log("process.env.CI : " + process.env.CI)
+    console.log(" ***************** ")
+}
