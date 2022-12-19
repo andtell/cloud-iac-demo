@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "prodbuild": "rm -rf dist && npm ci && npm run-script build",
+    "postbuild": "rm -f function.zip && cp -R node_modules dist && cd dist && zip -r ../function.zip .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.109",
+    "@types/node": "^18.11.17",
+    "typescript": "^4.9.4"
+  }
+}

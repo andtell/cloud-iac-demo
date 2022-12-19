@@ -1,6 +1,5 @@
 name: Deploy Infra
 on:
-  # - pull_request
   push:
     branches:
       - main
@@ -21,7 +20,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/develop' }}
         run: echo "PULUMI_STACK=dev" >> $GITHUB_ENV
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node ✨
         uses: actions/setup-node@v3
         with:
@@ -36,6 +35,13 @@ jobs:
         run: |
           cd ./gitops-demo/aws/infra
           npm install
+      - name: Download application artifact from CI build 📂 
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          path: gitops-demo/aws/app
+          workflow: ci_build.yml
+          workflow_conclusion: success
+          skip_unpack: true
       - name: Applying infrastructure 🚀
         uses: pulumi/actions@v3
         with:
