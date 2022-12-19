@@ -1,0 +1,3 @@
+config:
+  azure-demo:appPath: ../app
+  azure-native:location: swedencentral

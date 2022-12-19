@@ -1,0 +1,4 @@
+config:
+  gcp-demo:appPath: ../app
+  gcp:project: atell-demo
+  gcp:region: europe-central2
