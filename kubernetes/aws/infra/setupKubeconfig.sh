@@ -15,3 +15,6 @@ kubectl get svc
 
 
 # Maybe? https://stackoverflow.com/questions/72176710/eks-update-config-with-awscli-command-aws-eks-update-kubeconfig-fails-with-err
+
+
+ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | pbcopy 
