@@ -11,7 +11,7 @@ FROM node:16.17.0-bullseye-slim
 ENV NODE_ENV production
 WORKDIR /app
 COPY --from=builder ./app/dist ./dist
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci --production
 COPY --from=builder /usr/bin/dumb-init /usr/bin/dumb-init
 WORKDIR /app/dist
