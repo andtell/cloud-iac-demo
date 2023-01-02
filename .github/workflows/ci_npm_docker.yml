@@ -6,18 +6,19 @@ on:
   push:
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-excluding-branches
     branches-ignore:
-      - master
+      - main
     paths:
       - 'kubernetes/demo-app/**'
   pull_request:
     branches-ignore:
-      - master
+      - main
     paths:
       - 'kubernetes/demo-app/**'
+  workflow_dispatch:
 
 env: 
   AWS_REGION: eu-north-1
-  ECR_REPOSITORY: multienv-vote-${{ github.ref_name }}
+  ECR_REPOSITORY: cadec23-demo-${{ github.ref_name }}
   # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
   SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
 
