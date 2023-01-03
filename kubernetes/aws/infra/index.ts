@@ -2,6 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 import * as k8s from "@pulumi/kubernetes";
+import { newArgoApplication } from "./argoappdefinition";
 
 // Grab some values from the Pulumi configuration (or use default values)
 const config = new pulumi.Config();
@@ -9,6 +10,7 @@ const minClusterSize = config.getNumber("minClusterSize") || 3;
 const maxClusterSize = config.getNumber("maxClusterSize") || 6;
 const desiredClusterSize = config.getNumber("desiredClusterSize") || 3;
 const eksNodeInstanceType = config.get("eksNodeInstanceType") || "t3.small";
+// Problem : no available/free pods if choosing to too small EC2 instance, see: https://github.com/awslabs/amazon-eks-ami/blob/master/files/eni-max-pods.txt
 const vpcNetworkCidr = config.get("vpcNetworkCidr") || "10.0.0.0/16";
 const isMinikube = config.requireBoolean("isMinikube");
 
@@ -87,12 +89,6 @@ export const url = service.status.loadBalancer.ingress[0].hostname;
 // Create Kubernetes namespaces.
 
 const provider: k8s.Provider = eksCluster.provider
-
-
-// Problem : no avail free pods due to too small EC2 instance: https://github.com/awslabs/amazon-eks-ami/blob/master/files/eni-max-pods.txt
-
-
-
 const name = "argocd"
 const argocdNamespace = new k8s.core.v1.Namespace("argocd-ns", {
     metadata: { name: name },
@@ -133,5 +129,8 @@ const frontend = argocd.getResource("v1/Service", "argocd/argocd-server");
 export const ip = isMinikube
     ? frontend.spec.clusterIP
     : frontend.status.loadBalancer.apply(
-          (lb) => lb.ingress[0].ip || lb.ingress[0].hostname
+          (lb) => lb.ingress[0].ip || "https://" + lb.ingress[0].hostname
       );
+
+
+export const myapp  = newArgoApplication("cadec-demo", kubeconfig);
