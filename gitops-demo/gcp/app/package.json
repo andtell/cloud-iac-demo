@@ -1,0 +1,11 @@
+{
+    "name": "gcp-demo-app",
+    "version": "0.1.0",
+    "dependencies": {
+        "@google-cloud/functions-framework": "^3.1.0",
+        "axios": "^1.2.1"
+    },
+    "scripts": {
+        "start": "npx functions-framework --target=vote"
+    }
+}

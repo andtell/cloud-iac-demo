@@ -1,0 +1,7 @@
+{
+  "name": "azure-demo-app",
+  "version": "0.1.0",
+  "dependencies": {
+    "axios": "^1.2.1"
+  }
+}

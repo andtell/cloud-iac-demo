@@ -1,2 +1,7 @@
 config:
-  aws:region: eu-west-1
+  aws:region: eu-north-1
+  aws:defaultTags:
+    tags:
+      env: dev
+      type: cadec23
+  kubernetes-demo:isMinikube: "false"
