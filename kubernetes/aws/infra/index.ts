@@ -14,6 +14,8 @@ const eksNodeInstanceType = config.get("eksNodeInstanceType") || "t3.small";
 const vpcNetworkCidr = config.get("vpcNetworkCidr") || "10.0.0.0/16";
 const isMinikube = config.requireBoolean("isMinikube");
 
+const envSuffix: string = pulumi.getStack() == 'prod' ? '' : '-' + pulumi.getStack();
+
 // Create a new VPC
 const eksVpc = new awsx.ec2.Vpc("eks-vpc", {
     enableDnsHostnames: true,
@@ -133,4 +135,4 @@ export const ip = isMinikube
       );
 
 
-export const myapp  = newArgoApplication("cadec-demo", kubeconfig);
+//export const myapp  = newArgoApplication("cadec-demo", kubeconfig);

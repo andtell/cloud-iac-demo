@@ -1,7 +1,7 @@
 config:
-  aws:region: eu-north-1
   aws:defaultTags:
     tags:
-      env: dev
-      type: cadec23
+      project: cadec23
+  aws:region: eu-north-1
+  kubernetes-demo:argoCDGitTargetRevision: develop
   kubernetes-demo:isMinikube: "false"
