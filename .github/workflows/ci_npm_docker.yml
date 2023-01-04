@@ -62,7 +62,7 @@ jobs:
           VERSION=${{ env.SHORT_SHA }}
         tags: |
           ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.APP }}:${{ env.SHORT_SHA }}
-          ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.APP }}::latest
+          ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.APP }}:latest
           
 
     # - name: Configure AWS credentials
