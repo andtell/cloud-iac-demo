@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Deployment
 metadata:
-  name: cadec-demo-app
+  name: demo-app
 spec:
   selector:
     matchLabels:
-      app: cadec-demo-app
+      app: demo-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: cadec-demo-app
+        app: demo-app
     spec:
       containers:
-      - name: cadec-demo-app
+      - name: demo-app
         image: 135063735460.dkr.ecr.eu-north-1.amazonaws.com/cadec23-demo-develop:latest
         env:
         - name : NODE_ENV
