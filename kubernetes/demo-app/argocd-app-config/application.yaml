@@ -8,7 +8,8 @@ spec:
 
   source:
     repoURL: https://github.com/andtell/cloud-iac-demo.git
-    targetRevision: HEAD
+    # targetRevision: HEAD
+    targetRevision: develop
     path: kubernetes/demo-app/argocd-app-config/dev
   destination: 
     server: https://kubernetes.default.svc
