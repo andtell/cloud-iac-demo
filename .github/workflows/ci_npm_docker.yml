@@ -23,7 +23,7 @@ env:
   APP: cadec-demo
   # ECR_REPOSITORY: cadec23-demo-${{ github.ref_name }}
   # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
-  SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
+  # SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
 
 jobs:
   build:
@@ -37,6 +37,8 @@ jobs:
         echo github.ref_type: ${{ github.ref_type }}
         echo github.ref_name: ${{ github.ref_name }}
         echo github.sha: ${{ github.sha }}
+        echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c 1-8)" >> $GITHUB_ENV
+        echo env.SHORT_SHA: ${{ env.SHORT_SHA }}
         
     - name: Clone
       uses: actions/checkout@v3
