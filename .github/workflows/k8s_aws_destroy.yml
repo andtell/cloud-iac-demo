@@ -19,7 +19,7 @@ env:
   WORK_DIR: kubernetes/aws/infra
 
 jobs:
-  update:
+  destroy:
     name: Update
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +49,7 @@ jobs:
       - name: Applying infrastructure 🚀
         uses: pulumi/actions@v3
         with:
-          command: down
+          command: destroy
           stack-name: ${{ env.PULUMI_STACK }}
           work-dir: ${{ env.WORK_DIR }}
           refresh: true;
