@@ -16,8 +16,7 @@ on:
   workflow_dispatch:
 
 env: 
-  AWS_REGION: eu-north-1
-  WORK_DIR: gitops-demo/aws/infra
+  WORK_DIR: kubernetes/aws/infra
 
 jobs:
   update:
@@ -45,14 +44,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Installing dependencies 📦️
         run: |
-          cd ./kubernetes/aws/infra
+          cd ./${{ env.WORK_DIR }}
           npm install
       - name: Applying infrastructure 🚀
         uses: pulumi/actions@v3
         with:
           command: down
           stack-name: ${{ env.PULUMI_STACK }}
-          work-dir: gitops-demo/aws/infra
+          work-dir: ${{ env.WORK_DIR }}
           refresh: true;
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

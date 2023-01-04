@@ -15,8 +15,7 @@ on:
     - cron: '0 0 0 * *'
 
 env: 
-  AWS_REGION: eu-north-1
-  WORK_DIR: gitops-demo/aws/infra
+  WORK_DIR: kubernetes/aws/infra
 
 jobs:
   preview:
@@ -43,7 +42,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Installing dependencies 📦️
         run: |
-          cd .${{ env.WORK_DIR }}
+          cd ./${{ env.WORK_DIR }}
           npm install
       - name: Infrastructure preview 🔍
         uses: pulumi/actions@v3
