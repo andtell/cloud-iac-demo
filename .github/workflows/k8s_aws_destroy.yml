@@ -1,4 +1,4 @@
-name: Destroy K8S Cluster 💣
+name: EKS - Teardown 💣
 on:
   # pull_request:
   #   branches:

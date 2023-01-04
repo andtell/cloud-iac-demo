@@ -1,4 +1,4 @@
-name: Preview K8S Changes 🔍
+name: EKS - Preview/Check 🔍
 on:
   pull_request:
     branches:
