@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cadec-demo
-        image: 135063735460.dkr.ecr.eu-north-1.amazonaws.com/cadec23-demo-develop:latest
+        image: ghcr.io/andtell/cadec-demo:latest
         env:
         - name : NODE_ENV
           value : "dev"
