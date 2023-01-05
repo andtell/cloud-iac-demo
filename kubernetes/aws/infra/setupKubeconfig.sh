@@ -1,8 +1,8 @@
-pulumi stack output kubeconfig --show-secrets > kubeconfig.yml
+pulumi stack output kubeconfig --show-secrets > kubeconfig.json
 
 echo "Rember to 'source' this file in order to make env vars stick after exit."
 
-export KUBECONFIG=$PWD/kubeconfig.yml
+export KUBECONFIG=$PWD/kubeconfig.json
 
 echo $KUBECONFIG
 

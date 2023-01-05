@@ -11,8 +11,8 @@ on:
     paths:
       - 'gitops-demo/aws/infra/**'
   workflow_dispatch:
-  schedule:
-    - cron: '0 * * * *'
+  # schedule:
+    # - cron: '0 * * * *'
 
 env: 
   WORK_DIR: kubernetes/aws/infra

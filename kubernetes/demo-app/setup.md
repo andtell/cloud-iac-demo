@@ -19,6 +19,8 @@ EOF
 
 npm i express
 npm i -D @types/express
+npm i cors
+npm i -D @types/cors
 
 mkdir src && cd src
 touc app.ts
